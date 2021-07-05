@@ -1,7 +1,7 @@
 {
 	"name": "Associating_Quantities",
 	"short_name": "Associating_Quantities",
-	"description": "",
+	"description": "An educational game for kids. This game  hels kids to learn place value concept.",
 	"start_url": "index.html",
 	"display": "fullscreen",
 	"orientation": "landscape",

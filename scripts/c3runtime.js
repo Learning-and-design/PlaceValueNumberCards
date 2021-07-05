@@ -1414,16 +1414,17 @@ value;break;case "instance-variable":target.SetInstanceVariableValue(index,value
 (wi,v)=>wi.OffsetHeight(v),(wi,v)=>wi.SetHeight(v),wi=>wi.GetHeight(),true);add("offsetAngle",(wi,v)=>wi.OffsetAngle(v),(wi,v)=>wi.SetAngle(v),wi=>wi.GetAngle(),false);add("offsetOpacity",(wi,v,t,a)=>{const o=wi.GetOpacity();const nv=o+v;const min=0;const max=1;if(a._clampAccumulator===0){if(nv>max)a._clampAccumulator+=nv-max;else if(nv<min)a._clampAccumulator+=nv;wi.OffsetOpacity(v)}else{const nv=wi.GetOpacity()+v;if(v>0&&a._clampAccumulator>0){if(nv>max)a._clampAccumulator+=nv-max}else if(v>0&&
 a._clampAccumulator<0){a._clampAccumulator+=v;if(a._clampAccumulator>0)a._clampAccumulator=0}else if(v<0&&a._clampAccumulator>0){a._clampAccumulator+=v;if(a._clampAccumulator<0)a._clampAccumulator=0}else if(v<0&&a._clampAccumulator<0)if(nv<min)a._clampAccumulator+=nv}},(wi,v)=>{wi.SetOpacity(v)},wi=>{return wi.GetOpacity()},false);add("offsetOriginX",(wi,v)=>wi.OffsetOriginX(v),(wi,v)=>wi.SetOriginX(v),wi=>wi.GetOriginX(),false);add("offsetOriginY",(wi,v)=>wi.OffsetOriginY(v),(wi,v)=>wi.SetOriginY(v),
 wi=>wi.GetOriginY(),false);add("offsetZElevation",(wi,v)=>wi.OffsetZElevation(v),(wi,v)=>wi.SetZElevation(v),wi=>wi.GetZElevation(),true);add("offsetScaleX",(wi,v,t)=>{const mirrorFactor=wi.GetWidth()<0?-1:1;if(wi.GetTransformWithParentWidth()){const parentWi=wi.GetParent();const sgi=wi._GetSceneGraphInfo();wi.OffsetWidth(parentWi.GetWidth()*sgi.GetStartScaleX()*mirrorFactor*v)}else wi.OffsetWidth(t.GetOriginalWidth()*mirrorFactor*v)},(wi,v,t)=>{wi.SetWidth(t.GetOriginalWidth()*v)},(wi,t)=>{const mirrorFactor=
-wi.GetWidth()<0?-1:1;if(wi.GetTransformWithParentWidth()){const parentWi=wi.GetParent();const parentTrack=t.GetTimeline().GetTrackInstance(parentWi.GetInstance());const parentScale=parentWi.GetWidth()/parentTrack.GetOriginalWidth();return wi.GetWidth()*mirrorFactor/(t.GetOriginalWidth()*parentScale)}else return wi.GetWidth()*mirrorFactor/t.GetOriginalWidth()},false);add("offsetScaleY",(wi,v,t)=>{const flipFactor=wi.GetHeight()<0?-1:1;if(wi.GetTransformWithParentHeight()){const parentWi=wi.GetParent();
-const sgi=wi._GetSceneGraphInfo();wi.OffsetHeight(parentWi.GetHeight()*sgi.GetStartScaleY()*flipFactor*v)}else wi.OffsetHeight(t.GetOriginalHeight()*flipFactor*v)},(wi,v,t)=>{wi.SetHeight(t.GetOriginalHeight()*v)},(wi,t)=>{const flipFactor=wi.GetHeight()<0?-1:1;if(wi.GetTransformWithParentHeight()){const parentWi=wi.GetParent();const parentTrack=t.GetTimeline().GetTrackInstance(parentWi.GetInstance());const parentScale=parentWi.GetHeight()/parentTrack.GetOriginalHeight();return wi.GetHeight()*flipFactor/
-(t.GetOriginalHeight()*parentScale)}else return wi.GetHeight()*flipFactor/t.GetOriginalHeight()},false);class NumericInterpolationAdapter extends C3.PropertyTrackState.PropertyInterpolationAdapter{constructor(sourceAdapter){super(sourceAdapter);this._lastValue=0;this._clampAccumulator=0;this._instance_getter=null;this._instance_setter=null;this._instance_absolute_setter=null;this._round=false;if(C3.IsInstanceOf(this._propertyTrack.GetTimeline(),C3.Tween))this._typeAdapter=new C3.PropertyTrackState.PropertyInterpolationAdapter.NumericInterpolationAdapterForTween(this);
-else this._typeAdapter=new C3.PropertyTrackState.PropertyInterpolationAdapter.NumericInterpolationAdapterForTimeline(this);const property=this._propertyTrack.GetPropertyName();if(this._propertyTrack.GetSourceAdapterId()==="world-instance"){const p=INSTANCE_FUNC_MAP.get(property);this._instance_getter=p.getter;this._instance_setter=p.setter;this._instance_absolute_setter=p.absolute_setter;this._round=p.round}}Release(){this._typeAdapter=null;this._instance_getter=null;this._instance_setter=null;this._instance_absolute_setter=
-null;super.Release()}GetLastValue(){return this._lastValue}SetLastValue(v){this._lastValue=v}SetInitialState(){const initValue=this._typeAdapter.SetInitialState();if(typeof initValue==="number")this._lastValue=initValue;this._clampAccumulator=0}SetResumeState(){const resumeValue=this._typeAdapter.SetResumeState();if(typeof resumeValue==="number")this._lastValue=resumeValue}GetCurrentState(){return this._Getter()}CompareInitialStateWithCurrent(){const firstKeyframeValue=this._FirstKeyframeGetter();
-return firstKeyframeValue!==this.GetCurrentState()}CompareSaveStateWithCurrent(){if(C3.IsNullOrUndefined(this._saveState))return false;return this._saveState!==this.GetCurrentState()}BeforeChangeProperty(){this._typeAdapter.BeforeChangeProperty()}ChangeProperty(time,value,start,end,setTime,ensureValue){return this._typeAdapter.ChangeProperty(time,value,start,end,setTime,ensureValue)}AfterChangeProperty(){this._typeAdapter.AfterChangeProperty()}_Getter(){const target=this._GetTarget();const index=
-this._GetIndex();const track=this._propertyTrack.GetTrack();const wi=this.GetWorldInfo();return this._PickSource(()=>target.GetPropertyValueByIndex(index),()=>target[index],()=>target.GetInstanceVariableValue(index),()=>target.GetPropertyValueByIndex(index),()=>this._instance_getter(wi,track))}_Setter(value,start,end){const target=this._GetTarget();const index=this._GetIndex();const track=this._propertyTrack.GetTrack();const wi=this.GetWorldInfo();this._PickSource(()=>target.OffsetPropertyValueByIndex(index,
-value),()=>target[index]+=value,()=>target.SetInstanceVariableOffset(index,value),()=>target.OffsetPropertyValueByIndex(index,value),()=>this._instance_setter(wi,value,track,this))}_SetterAbsolute(value,start,end){const target=this._GetTarget();const index=this._GetIndex();const track=this._propertyTrack.GetTrack();const wi=this.GetWorldInfo();this._PickSource(()=>target.SetPropertyValueByIndex(index,value),()=>target[index]=value,()=>target.SetInstanceVariableValue(index,value),()=>target.SetPropertyValueByIndex(index,
-value),()=>this._instance_absolute_setter(wi,value,track))}_MaybeEnsureValue(time,start,end,setTime,lastValue,currentValue){this._typeAdapter._MaybeEnsureValue(time,start,end,setTime,lastValue,currentValue)}_AddDelta(value,start,end){const stringValue=value.toString();const decimalsString=stringValue.split(".")[1]||"";const decimalPlaces=decimalsString.length;const v=this._Getter();let rv;if(decimalPlaces===0)rv=this._round?Math.round(v):v;else rv=C3.toFixed(v,decimalPlaces);this._Setter(rv-v,start,
-end)}_SaveToJson(){return Object.assign(super._SaveToJson(),{"v":this._lastValue,"a":this._clampAccumulator})}_LoadFromJson(o){if(!o)return;super._LoadFromJson(o);this._lastValue=o["v"];this._clampAccumulator=o["a"]}}C3.PropertyTrackState.PropertyInterpolationAdapter.NumericInterpolationAdapter=NumericInterpolationAdapter};
+wi.GetWidth()<0?-1:1;if(wi.GetTransformWithParentWidth()){const parentWi=wi.GetParent();const parentTrack=t.GetTimeline().GetTrackInstance(parentWi.GetInstance());let parentScale=NaN;if(parentTrack)parentScale=parentWi.GetWidth()/parentTrack.GetOriginalWidth();else{const sdki=parentWi.GetInstance().GetSdkInstance();if(sdki.IsOriginalSizeKnown())parentScale=parentWi.GetWidth()/sdki.GetOriginalWidth();else parentScale=1}return wi.GetWidth()*mirrorFactor/(t.GetOriginalWidth()*parentScale)}else return wi.GetWidth()*
+mirrorFactor/t.GetOriginalWidth()},false);add("offsetScaleY",(wi,v,t)=>{const flipFactor=wi.GetHeight()<0?-1:1;if(wi.GetTransformWithParentHeight()){const parentWi=wi.GetParent();const sgi=wi._GetSceneGraphInfo();wi.OffsetHeight(parentWi.GetHeight()*sgi.GetStartScaleY()*flipFactor*v)}else wi.OffsetHeight(t.GetOriginalHeight()*flipFactor*v)},(wi,v,t)=>{wi.SetHeight(t.GetOriginalHeight()*v)},(wi,t)=>{const flipFactor=wi.GetHeight()<0?-1:1;if(wi.GetTransformWithParentHeight()){const parentWi=wi.GetParent();
+const parentTrack=t.GetTimeline().GetTrackInstance(parentWi.GetInstance());let parentScale=NaN;if(parentTrack)parentScale=parentWi.GetHeight()/parentTrack.GetOriginalHeight();else{const sdki=parentWi.GetInstance().GetSdkInstance();if(sdki.IsOriginalSizeKnown())parentScale=parentWi.GetHeight()/sdki.GetOriginalHeight();else parentScale=1}return wi.GetHeight()*flipFactor/(t.GetOriginalHeight()*parentScale)}else return wi.GetHeight()*flipFactor/t.GetOriginalHeight()},false);class NumericInterpolationAdapter extends C3.PropertyTrackState.PropertyInterpolationAdapter{constructor(sourceAdapter){super(sourceAdapter);
+this._lastValue=0;this._clampAccumulator=0;this._instance_getter=null;this._instance_setter=null;this._instance_absolute_setter=null;this._round=false;if(C3.IsInstanceOf(this._propertyTrack.GetTimeline(),C3.Tween))this._typeAdapter=new C3.PropertyTrackState.PropertyInterpolationAdapter.NumericInterpolationAdapterForTween(this);else this._typeAdapter=new C3.PropertyTrackState.PropertyInterpolationAdapter.NumericInterpolationAdapterForTimeline(this);const property=this._propertyTrack.GetPropertyName();
+if(this._propertyTrack.GetSourceAdapterId()==="world-instance"){const p=INSTANCE_FUNC_MAP.get(property);this._instance_getter=p.getter;this._instance_setter=p.setter;this._instance_absolute_setter=p.absolute_setter;this._round=p.round}}Release(){this._typeAdapter=null;this._instance_getter=null;this._instance_setter=null;this._instance_absolute_setter=null;super.Release()}GetLastValue(){return this._lastValue}SetLastValue(v){this._lastValue=v}SetInitialState(){const initValue=this._typeAdapter.SetInitialState();
+if(typeof initValue==="number")this._lastValue=initValue;this._clampAccumulator=0}SetResumeState(){const resumeValue=this._typeAdapter.SetResumeState();if(typeof resumeValue==="number")this._lastValue=resumeValue}GetCurrentState(){return this._Getter()}CompareInitialStateWithCurrent(){const firstKeyframeValue=this._FirstKeyframeGetter();return firstKeyframeValue!==this.GetCurrentState()}CompareSaveStateWithCurrent(){if(C3.IsNullOrUndefined(this._saveState))return false;return this._saveState!==this.GetCurrentState()}BeforeChangeProperty(){this._typeAdapter.BeforeChangeProperty()}ChangeProperty(time,
+value,start,end,setTime,ensureValue){return this._typeAdapter.ChangeProperty(time,value,start,end,setTime,ensureValue)}AfterChangeProperty(){this._typeAdapter.AfterChangeProperty()}_Getter(){const target=this._GetTarget();const index=this._GetIndex();const track=this._propertyTrack.GetTrack();const wi=this.GetWorldInfo();return this._PickSource(()=>target.GetPropertyValueByIndex(index),()=>target[index],()=>target.GetInstanceVariableValue(index),()=>target.GetPropertyValueByIndex(index),()=>this._instance_getter(wi,
+track))}_Setter(value,start,end){const target=this._GetTarget();const index=this._GetIndex();const track=this._propertyTrack.GetTrack();const wi=this.GetWorldInfo();this._PickSource(()=>target.OffsetPropertyValueByIndex(index,value),()=>target[index]+=value,()=>target.SetInstanceVariableOffset(index,value),()=>target.OffsetPropertyValueByIndex(index,value),()=>this._instance_setter(wi,value,track,this))}_SetterAbsolute(value,start,end){const target=this._GetTarget();const index=this._GetIndex();const track=
+this._propertyTrack.GetTrack();const wi=this.GetWorldInfo();this._PickSource(()=>target.SetPropertyValueByIndex(index,value),()=>target[index]=value,()=>target.SetInstanceVariableValue(index,value),()=>target.SetPropertyValueByIndex(index,value),()=>this._instance_absolute_setter(wi,value,track))}_MaybeEnsureValue(time,start,end,setTime,lastValue,currentValue){this._typeAdapter._MaybeEnsureValue(time,start,end,setTime,lastValue,currentValue)}_AddDelta(value,start,end){const stringValue=value.toString();
+const decimalsString=stringValue.split(".")[1]||"";const decimalPlaces=decimalsString.length;const v=this._Getter();let rv;if(decimalPlaces===0)rv=this._round?Math.round(v):v;else rv=C3.toFixed(v,decimalPlaces);this._Setter(rv-v,start,end)}_SaveToJson(){return Object.assign(super._SaveToJson(),{"v":this._lastValue,"a":this._clampAccumulator})}_LoadFromJson(o){if(!o)return;super._LoadFromJson(o);this._lastValue=o["v"];this._clampAccumulator=o["a"]}}C3.PropertyTrackState.PropertyInterpolationAdapter.NumericInterpolationAdapter=
+NumericInterpolationAdapter};
 
 
 // c3/timelines/state/propertyInterpolationAdapters/numericInterpolationAdapterForTimeline.js
@@ -3164,8 +3165,8 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		C3.Plugins.Text,
 		C3.Behaviors.Pin,
 		C3.Behaviors.Tween,
-		C3.Behaviors.DragnDrop,
 		C3.Plugins.Arr,
+		C3.Behaviors.DragnDrop,
 		C3.Plugins.System.Cnds.IsGroupActive,
 		C3.Plugins.Audio.Cnds.IsTagPlaying,
 		C3.Plugins.System.Cnds.CompareBoolVar,
@@ -3212,14 +3213,27 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		C3.Behaviors.Pin.Acts.Unpin,
 		C3.Plugins.Sprite.Acts.SetSize,
 		C3.Plugins.System.Acts.GoToLayout,
+		C3.Behaviors.DragnDrop.Cnds.OnDragStart,
+		C3.Plugins.Sprite.Cnds.IsAnimPlaying,
 		C3.Plugins.System.Cnds.CompareBetween,
 		C3.Plugins.Sprite.Acts.Destroy,
+		C3.Plugins.Arr.Acts.SetSize,
+		C3.Plugins.Arr.Acts.SetX,
+		C3.Plugins.System.Cnds.Repeat,
+		C3.Plugins.System.Acts.AddVar,
+		C3.Plugins.Arr.Exps.At,
+		C3.Plugins.System.Cnds.PickByEvaluate,
+		C3.Plugins.Sprite.Acts.SetOpacity,
+		C3.Plugins.Sprite.Acts.SetScale,
+		C3.Plugins.Sprite.Acts.SetAnimFrame,
+		C3.Plugins.System.Acts.SubVar,
 		C3.Plugins.Sprite.Cnds.OnCreated,
+		C3.Plugins.Sprite.Acts.SetInstanceVar,
+		C3.Plugins.Sprite.Exps.IID,
 		C3.Plugins.Sprite.Cnds.IsBoolInstanceVarSet,
 		C3.Plugins.Sprite.Acts.ZMoveToObject,
 		C3.Plugins.Sprite.Cnds.CompareX,
 		C3.Plugins.Sprite.Acts.SetBoolInstanceVar,
-		C3.Plugins.System.Acts.AddVar,
 		C3.Behaviors.DragnDrop.Cnds.IsEnabled,
 		C3.Plugins.System.Acts.CreateObjectByName,
 		C3.Plugins.Sprite.Acts.SetX,
@@ -3239,20 +3253,16 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		C3.Plugins.LocalStorage.Cnds.OnItemGet,
 		C3.Plugins.LocalStorage.Exps.ItemValue,
 		C3.Plugins.System.Acts.RestartLayout,
-		C3.Plugins.Sprite.Cnds.IsAnimPlaying,
 		C3.Plugins.System.Acts.SetBoolVar,
 		C3.Plugins.Browser.Exps.ExecJS,
 		C3.Plugins.Arr.Acts.Push,
 		C3.Plugins.System.Exps.choose,
-		C3.Plugins.Arr.Exps.At,
 		C3.Plugins.Arr.Acts.Pop,
 		C3.Behaviors.Pin.Cnds.IsPinned,
-		C3.Plugins.Arr.Acts.SetSize,
 		C3.Behaviors.Tween.Cnds.OnTweensFinished,
 		C3.Behaviors.Tween.Acts.TweenTwoProperties,
 		C3.Behaviors.Tween.Acts.TweenOneProperty,
 		C3.Plugins.Text.Acts.Destroy,
-		C3.Plugins.System.Acts.SubVar,
 		C3.Plugins.Sprite.Acts.SetMirrored,
 		C3.Plugins.Arr.Cnds.CompareX,
 		C3.Plugins.System.Exps.int,
@@ -3265,11 +3275,10 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		C3.Plugins.Text.Acts.SetFontSize,
 		C3.Plugins.Text.Acts.SetFontColor,
 		C3.Plugins.System.Exps.rgbex255,
-		C3.Plugins.Sprite.Acts.SetAnimFrame,
 		C3.Plugins.Text.Acts.SetOpacity,
 		C3.Behaviors.Fade.Cnds.OnFadeOutEnd,
-		C3.Behaviors.DragnDrop.Cnds.OnDragStart,
 		C3.Plugins.Arr.Exps.Width,
+		C3.Plugins.LocalStorage.Acts.ClearStorage,
 		C3.Plugins.Button.Cnds.CompareInstanceVar,
 		C3.Plugins.Button.Cnds.IsVisible,
 		C3.Plugins.System.Acts.GoToLayoutByName,
@@ -3343,7 +3352,11 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		{UnitCard_slot: 0},
 		{Units_bluePatch: 0},
 		{White_line: 0},
+		{AudioTime_Units: 0},
+		{AudioTime_Tens: 0},
+		{AudioTime_Hundred: 0},
 		{L0_Placed: 0},
+		{index: 0},
 		{"80_numberCards": 0},
 		{"50_numberCards": 0},
 		{"40_numberCards": 0},
@@ -3353,6 +3366,7 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		{"10_numberCards": 0},
 		{"30_numberCards": 0},
 		{"20_numberCards": 0},
+		{Index: 0},
 		{"8_numberCards": 0},
 		{"5_numberCards": 0},
 		{"4_numberCards": 0},
@@ -3434,6 +3448,12 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		{L0_CurrentNumber: 0},
 		{L0_SlotPosX: 0},
 		{L0_SlotPosY: 0},
+		{Hightlight_Count: 0},
+		{NC_Count: 0},
+		{Quantity_Count: 0},
+		{audio_ind: 0},
+		{waitTime: 0},
+		{i: 0},
 		{L1_Date: 0},
 		{L1_TimeSpent_Try: 0},
 		{L1_TimeSpent: 0},
@@ -3940,6 +3960,15 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		() => 630,
 		() => "AQN_A_L0_5",
 		() => "AQN_A_L0_6",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject();
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 30);
+		},
+		() => "Click",
 		() => 4,
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -3967,6 +3996,8 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 			return () => ("AQN_A_L0_7" + v0.GetValue());
 		},
 		() => 10,
+		() => "Default",
+		() => 1000,
 		() => "Number Slot Set",
 		() => 800,
 		() => 670,
@@ -3999,9 +4030,59 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 			const v0 = p._GetNode(0).GetVar();
 			return () => ("AQN_A_L0_8" + v0.GetValue());
 		},
+		() => 1.5,
+		() => 1.3,
+		() => 1.8,
+		() => 1.7,
+		() => 1.2,
+		() => 2.2,
 		() => "CurrentNumber",
 		() => "AQN_A_L0_9",
 		() => "Ones",
+		() => 22,
+		() => 32,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() - 1);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => n0.ExpObject(v1.GetValue());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => ((n0.ExpInstVar_Family()) === ((v1.GetValue() - 1)) ? 1 : 0);
+		},
+		() => 33,
+		() => 48,
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => ((n0.ExpInstVar_Family()) !== ((v1.GetValue() - 1)) ? 1 : 0);
+		},
+		() => 0.7,
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => ((n0.ExpInstVar()) !== ((v1.GetValue() - 1)) ? 1 : 0);
+		},
+		() => 0.5682,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() + 1);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => ((n0.ExpInstVar_Family()) === (v1.GetValue()) ? 1 : 0);
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			return () => ((v0.GetValue() + 1) - (v1.GetValue() * 0.15));
+		},
 		() => 760,
 		() => 160,
 		() => 250,
@@ -4012,10 +4093,9 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		},
 		p => {
 			const n0 = p._GetNode(0);
-			return () => n0.ExpObject();
+			const v1 = p._GetNode(1).GetVar();
+			return () => ((n0.ExpObject()) === ((v1.GetValue() - 1)) ? 1 : 0);
 		},
-		() => 22,
-		() => 32,
 		() => "1",
 		() => "1Tutorial",
 		() => -400,
@@ -4023,7 +4103,6 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 			const v0 = p._GetNode(0).GetVar();
 			return () => (v0.GetValue()).toString();
 		},
-		() => 0.1,
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => and(v0.GetValue(), "_numberCards");
@@ -4035,9 +4114,19 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		},
 		() => "AQN_A_L0_18",
 		() => "Tens",
+		() => 44,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ((v0.GetValue() / 10) - 1);
+		},
+		() => 66,
 		() => 570,
 		() => 720,
-		() => 44,
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => ((n0.ExpObject()) === (((v1.GetValue() / 10) - 1)) ? 1 : 0);
+		},
 		() => "TensCard_slot",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -4045,11 +4134,20 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		},
 		() => "AQN_A_L0_27",
 		() => "Hundreds",
-		() => 475,
-		() => 267,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ((v0.GetValue() / 100) - 1);
+		},
 		() => 65,
+		() => 92,
+		() => 267,
+		() => 475,
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => ((n0.ExpObject()) === (((v1.GetValue() / 100) - 1)) ? 1 : 0);
+		},
 		() => "HundredsCard_slot",
-		() => 1000,
 		() => 710,
 		() => 750,
 		() => 470,
@@ -4165,6 +4263,7 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		() => "L1_Save",
 		() => "GL_A_2",
 		() => "Find_CurrentPhonograph",
+		() => 0.1,
 		() => "Back",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -4598,7 +4697,6 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		() => "L2 On End",
 		() => "L2",
 		() => 0.25,
-		() => 1.5,
 		() => "L2_GameSave",
 		p => {
 			const n0 = p._GetNode(0);
@@ -5013,15 +5111,20 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 			const n2 = p._GetNode(2);
 			return () => (((9 - n0.ExpObject()) + ((9 - n1.ExpObject()) * 10)) + ((9 - n2.ExpObject()) * 100));
 		},
-		() => 0.7,
 		() => "Clue L3",
 		() => "End L3",
 		() => 585,
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			const v1 = p._GetNode(1).GetVar();
+			return () => and(and(v0.GetValue(), " "), v1.GetValue());
+		},
 		() => "MusicL4",
 		() => "PI_L4",
 		() => "L4_SaveState",
 		() => "Data L4",
 		() => "UI L4",
+		() => "GL_A_6",
 		() => "L4_Save",
 		() => "Number Replay Counter L4",
 		() => "ArrayL4_Number",
@@ -5153,13 +5256,6 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => ("GL_A_6" + v0.GetValue());
-		},
-		() => "GL_A_6",
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			return () => and((and(and(n0.ExpObject(), " "), n1.ExpObject()) + " "), n2.ExpObject());
 		},
 		() => "Music T L4",
 		p => {

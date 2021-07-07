@@ -4270,12 +4270,13 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 			return () => ("GL_A_2" + v0.GetValue());
 		},
 		() => "L1_GameSave",
+		() => "Correct",
+		() => "Incorrect",
 		() => "CurrentNumberCollect",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => (v0.GetValue() + "Collect");
 		},
-		() => "Correct",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0("Date()");
@@ -4811,7 +4812,6 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		() => "Numbers",
 		() => "L2_1",
 		() => "IncorrectSound",
-		() => "Incorrect",
 		() => "L2_2",
 		() => "L2_3",
 		() => "L2_4",

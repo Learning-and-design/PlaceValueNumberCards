@@ -3278,7 +3278,6 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		C3.Plugins.Text.Acts.SetOpacity,
 		C3.Behaviors.Fade.Cnds.OnFadeOutEnd,
 		C3.Plugins.Arr.Exps.Width,
-		C3.Plugins.LocalStorage.Acts.ClearStorage,
 		C3.Plugins.Button.Cnds.CompareInstanceVar,
 		C3.Plugins.Button.Cnds.IsVisible,
 		C3.Plugins.System.Acts.GoToLayoutByName,
@@ -4713,6 +4712,7 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 			return () => (v0.GetValue() - 900);
 		},
 		() => 175,
+		() => "CurrentNumberReplay",
 		() => "Number Replay Counter L2",
 		() => "Data L2",
 		() => "UI L2",
@@ -5113,13 +5113,12 @@ newY);wi.SetBboxChanged()}}else if(this._axes===1){if(wi.GetX()!==newX){wi.SetX(
 		},
 		() => "Clue L3",
 		() => "End L3",
-		() => 585,
+		() => "MusicL4",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			const v1 = p._GetNode(1).GetVar();
 			return () => and(and(v0.GetValue(), " "), v1.GetValue());
 		},
-		() => "MusicL4",
 		() => "PI_L4",
 		() => "L4_SaveState",
 		() => "Data L4",

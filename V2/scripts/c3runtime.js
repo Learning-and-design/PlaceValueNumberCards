@@ -4437,13 +4437,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.OnLayoutStart,
 		C3.Plugins.Arr.Acts.SetSize,
 		C3.Plugins.Arr.Acts.SetX,
-		C3.Plugins.Sprite.Acts.SetSize,
-		C3.Plugins.Browser.Exps.ExecJS,
-		C3.Plugins.Sprite.Acts.SetPos,
-		C3.Plugins.System.Exps.viewportleft,
-		C3.Plugins.System.Exps.viewportright,
-		C3.Plugins.System.Exps.viewporttop,
-		C3.Plugins.System.Exps.viewportbottom,
 		C3.Plugins.Arr.Cnds.IsEmpty,
 		C3.Plugins.Json.Cnds.ForEach,
 		C3.Plugins.Arr.Acts.Push,
@@ -4463,6 +4456,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.SetVisible,
 		C3.Plugins.Sprite.Acts.SetBoolInstanceVar,
 		C3.Plugins.Audio.Acts.Stop,
+		C3.Plugins.Sprite.Acts.SetPos,
 		C3.Plugins.System.Exps.max,
 		C3.Plugins.System.Acts.SetBoolVar,
 		C3.Plugins.Json.Acts.SetValue,
@@ -4508,6 +4502,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Fade.Acts.SetFadeInTime,
 		C3.Behaviors.Fade.Acts.SetFadeOutTime,
 		C3.Behaviors.Fade.Acts.RestartFade,
+		C3.Plugins.System.Exps.viewportleft,
 		C3.Plugins.Sprite.Exps.Y,
 		C3.Behaviors.DragnDrop.Cnds.OnDrop,
 		C3.Plugins.Sprite.Acts.MoveToLayer,
@@ -4540,6 +4535,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.ScriptsInEvents["Es_level1-Tutorial_Event1_Act3"],
 		C3.Plugins.Sprite.Exps.ImagePointX,
 		C3.Plugins.Sprite.Exps.ImagePointY,
+		C3.Plugins.System.Exps.viewportright,
 		C3.Behaviors.Sin.Acts.SetEnabled,
 		C3.Plugins.Sprite.Acts.SetPosToObject,
 		C3.Plugins.Sprite.Cnds.OnCreated,
@@ -5137,19 +5133,6 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => (v0.GetValue() + "L4_6");
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0("window.innerWidth");
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0("window.innerHeight");
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const f1 = p._GetNode(1).GetBoundMethod();
-			return () => ((f0(0) + f1(0)) / 2);
 		},
 		() => "L1",
 		p => {
@@ -5969,6 +5952,11 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const n0 = p._GetNode(0);
 			return () => (n0.ExpObject() + 1000);
+		},
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => ((f0(0) + f1(0)) / 2);
 		},
 		p => {
 			const v0 = p._GetNode(0).GetVar();

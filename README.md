@@ -2,4 +2,4 @@
  This game is developed by Mike for KEPL
 
 # Game Link
-[Play Game](https://learning-and-design.github.io/PlaceValueNumberCards?v=1)
+[Play Game](https://learning-and-design.github.io/PlaceValueNumberCards/Latest/)

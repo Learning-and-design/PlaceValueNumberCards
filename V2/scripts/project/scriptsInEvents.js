@@ -24,9 +24,9 @@ class AppInterface  {
 
 const scriptsInEvents = {
 
-		async Es_common_Event134_Act2(runtime, localVars)
+		async Es_common_Event134_Act1(runtime, localVars)
 		{
-			localStorage.setItem("pvq-data", JSON.stringify(runtime.getInstanceByUid(runtime.globalVars.JSON_UID).getJsonDataCopy()));
+			localStorage.setItem(runtime.globalVars.LOCAL_GAME_KEY, JSON.stringify(runtime.getInstanceByUid(runtime.globalVars.JSON_UID).getJsonDataCopy()));
 			console.log(runtime.getInstanceByUid(runtime.globalVars.JSON_UID).getJsonDataCopy())
 		},
 
@@ -203,7 +203,7 @@ const scriptsInEvents = {
 			document.body.style.backgroundColor = colors[level];
 		},
 
-		async Es_level3_Event72_Act4(runtime, localVars)
+		async Es_level3_Event68_Act4(runtime, localVars)
 		{
 			let data = JSON.parse(localStorage.getItem(runtime.globalVars.LOCAL_GAME_KEY));
 			runtime.globalVars.RewardPoints = data.totalRewards;

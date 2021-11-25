@@ -4460,10 +4460,11 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Exps.max,
 		C3.Plugins.System.Acts.SetBoolVar,
 		C3.Plugins.Json.Acts.SetValue,
-		C3.Plugins.Audio.Acts.StopAll,
-		C3.ScriptsInEvents.Es_common_Event134_Act2,
+		C3.ScriptsInEvents.Es_common_Event134_Act1,
+		C3.Plugins.Browser.Acts.Close,
 		C3.Plugins.Json.Acts.SetJSON,
 		C3.Plugins.Json.Exps.GetAsCompactString,
+		C3.Plugins.Audio.Acts.StopAll,
 		C3.ScriptsInEvents.Es_common_Event135_Act4,
 		C3.ScriptsInEvents.Es_common_Event137_Act1,
 		C3.Plugins.System.Acts.SaveState,
@@ -4569,11 +4570,10 @@ self.C3_GetObjectRefTable = function () {
 		C3.ScriptsInEvents["Es_level3-Tutorial_Event1_Act3"],
 		C3.Plugins.System.Cnds.PickRandom,
 		C3.ScriptsInEvents.Es_level3_Event4_Act3,
-		C3.Behaviors.Fade.Acts.StartFade,
 		C3.Plugins.Arr.Acts.Sort,
 		C3.Plugins.Arr.Acts.Pop,
 		C3.Plugins.System.Cnds.ForEachOrdered,
-		C3.ScriptsInEvents.Es_level3_Event72_Act4,
+		C3.ScriptsInEvents.Es_level3_Event68_Act4,
 		C3.ScriptsInEvents.Es_level4_Event4_Act3,
 		C3.Plugins.Sprite.Exps.ZIndex,
 		C3.Plugins.Sprite.Exps.IID,
@@ -6147,8 +6147,6 @@ self.C3_ExpressionFuncs = [
 		() => "L3-Tutorial",
 		() => "Level3-Game",
 		() => "Level3-Audio",
-		() => "Reposition-Correct",
-		() => 0.35,
 		() => "Number_Quantities",
 		p => {
 			const n0 = p._GetNode(0);
@@ -6187,7 +6185,9 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => and("SUM ::::::::", f0());
 		},
+		() => "for the wrong answer",
 		() => "Reposition-Incorrect",
+		() => "Reposition-Correct",
 		p => {
 			const n0 = p._GetNode(0);
 			const v1 = p._GetNode(1).GetVar();
